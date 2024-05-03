@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind : Deployment
+metadata:
+  name : mysql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql-container
+          image: mysql
+          env:
+            - name: MYSQL_DATABASE
+              value: demo
+            - name: MYSQL_ROOT_PASSWORD
+              value: Test@1234
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: mysql-volume
+      volumes:
+        - name: mysql-volume
+          persistentVolumeClaim:
+            claimName: host-pvc
