@@ -2,7 +2,6 @@ services:
   # This is a dummy mysql server
   mysql:
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
     env_file:
       - local-mysql-env
     volumes:
@@ -14,7 +13,7 @@ services:
     env_file:
       - local-env
     ports:
-      - 8080:80
+      - 80:8080
 
 volumes:
   mysqlDataDir:
